@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bookmarkops.dev/schemas/bookmark-plan.schema.json",
+  "title": "BookmarkOps Plan",
+  "type": "object",
+  "required": ["bookmarkopsVersion", "summary", "riskLevel", "createdBy", "createdAt", "operations"],
+  "additionalProperties": false,
+  "properties": {
+    "bookmarkopsVersion": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "riskLevel": {
+      "type": "string",
+      "enum": ["low", "medium", "high"]
+    },
+    "createdBy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "dryRun": {
+      "type": "boolean"
+    },
+    "operations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          { "$ref": "#/$defs/createFolder" },
+          { "$ref": "#/$defs/moveBookmark" },
+          { "$ref": "#/$defs/renameNode" },
+          { "$ref": "#/$defs/deleteBookmark" },
+          { "$ref": "#/$defs/deleteEmptyFolder" }
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "path": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "description": {
+      "type": "string"
+    },
+    "nodeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "createFolder": {
+      "type": "object",
+      "required": ["type", "path"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "const": "createFolder" },
+        "path": { "$ref": "#/$defs/path" },
+        "description": { "$ref": "#/$defs/description" }
+      }
+    },
+    "moveBookmark": {
+      "type": "object",
+      "required": ["type", "id", "expectedTitle", "expectedUrl", "destination"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "const": "moveBookmark" },
+        "id": { "$ref": "#/$defs/nodeId" },
+        "expectedTitle": { "type": "string" },
+        "expectedUrl": { "type": "string" },
+        "expectedParentPath": { "$ref": "#/$defs/path" },
+        "destination": { "$ref": "#/$defs/path" },
+        "description": { "$ref": "#/$defs/description" }
+      }
+    },
+    "renameNode": {
+      "type": "object",
+      "required": ["type", "id", "expectedTitle", "newTitle"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "const": "renameNode" },
+        "id": { "$ref": "#/$defs/nodeId" },
+        "expectedTitle": { "type": "string" },
+        "newTitle": { "type": "string", "minLength": 1 },
+        "description": { "$ref": "#/$defs/description" }
+      }
+    },
+    "deleteBookmark": {
+      "type": "object",
+      "required": ["type", "id", "expectedTitle", "expectedUrl"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "const": "deleteBookmark" },
+        "id": { "$ref": "#/$defs/nodeId" },
+        "expectedTitle": { "type": "string" },
+        "expectedUrl": { "type": "string" },
+        "expectedParentPath": { "$ref": "#/$defs/path" },
+        "description": { "$ref": "#/$defs/description" }
+      }
+    },
+    "deleteEmptyFolder": {
+      "type": "object",
+      "required": ["type", "id", "expectedTitle"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "const": "deleteEmptyFolder" },
+        "id": { "$ref": "#/$defs/nodeId" },
+        "expectedTitle": { "type": "string" },
+        "expectedParentPath": { "$ref": "#/$defs/path" },
+        "description": { "$ref": "#/$defs/description" }
+      }
+    }
+  }
+}

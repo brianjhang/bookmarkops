@@ -1,0 +1,3 @@
+# Binary assets — keep diffs clean and prevent accidental text normalisation
+*.mp4 binary
+*.pdf binary

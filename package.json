@@ -1,0 +1,31 @@
+{
+  "name": "bookmarkops",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "AI-assisted bookmark cleanup MCP tool for Chrome. Scan, plan, and clean up bookmarks through any MCP-capable AI agent — with destructive actions gated by typed dashboard approval.",
+  "homepage": "https://github.com/brianjhang/bookmarkops#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brianjhang/bookmarkops.git"
+  },
+  "bugs": {
+    "url": "https://github.com/brianjhang/bookmarkops/issues"
+  },
+  "license": "MIT",
+  "author": "Brian Jhang <me@brianjhang.com>",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "test:task1": "node scripts/smoke-scan-report.mjs",
+    "test:workflow": "node scripts/smoke-workflow.mjs",
+    "test:extension-runtime": "node scripts/smoke-extension-runtime.mjs",
+    "test:isolated-runtime": "npm run test:extension-runtime",
+    "validate": "npm run test:task1 && npm run test:workflow && npm run build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@crxjs/vite-plugin": "^2.0.0-beta.33",
+    "vite": "^8.0.10"
+  }
+}

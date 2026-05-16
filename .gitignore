@@ -1,0 +1,39 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build
+dist/
+dist-ssr/
+.vite/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+
+# AI tool session state (harness may auto-create these in any cwd)
+.claude/
+.codex/
+.agents/
+.gstack/
+.omc/
+.omx/
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Chrome extension signing
+*.pem
+
+# Local-only files (defense-in-depth)
+*.local
