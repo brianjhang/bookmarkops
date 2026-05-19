@@ -1,10 +1,19 @@
 # BookmarkOps — Chrome Web Store Listing
 
-**English** · [繁體中文](./store-listing.zh-TW.md) · [简体中文](./store-listing.zh-CN.md)
+**English** (v1 ships English-only; zh-TW / zh-CN listing localization deferred to a later release)
 
-> Source of truth for the Chrome Web Store form. Paste each section into the matching CWS field at submission time.
+> Single source of truth for the entire Chrome Web Store submission — listing
+> fields AND Privacy practices tab fields. Paste each section into the
+> matching CWS field at submission time. This now incorporates the corrected
+> Privacy-practices content (single purpose, permission justifications, data
+> disclosure) that was drafted standalone earlier; that standalone Part B is
+> superseded by this file.
 >
-> **Version:** 1.0 · **Last updated:** 2026-05-15
+> **Version:** 2.0 (reconciled) · **Last updated:** 2026-05-19
+>
+> Must stay exactly consistent with repo-root `PRIVACY-POLICY.md`. Reviewers
+> cross-check listing ↔ manifest ↔ privacy policy; any mismatch is the top
+> first-time rejection cause.
 
 ---
 
@@ -14,7 +23,7 @@
 BookmarkOps — AI bookmark cleanup
 ```
 
-> Count: 33 characters · ✓ within limit.
+> 33 characters · within limit.
 
 ---
 
@@ -24,9 +33,7 @@ BookmarkOps — AI bookmark cleanup
 AI bookmark cleanup for Chrome — connect Codex, Claude Code, or Cursor, then approve every change yourself in the dashboard.
 ```
 
-> Count: 125 characters · ✓ within limit.
->
-> This is the line shown in CWS search results. Lead with the value, name the AI tools, set the safety expectation.
+> 125 characters · within limit. Shown in CWS search results.
 
 ---
 
@@ -72,7 +79,7 @@ scan → report → plan → dryRun → preview → backup → apply → verify 
 
 ### Quick start
 
-> **First-time users: we recommend OpenAI Codex.** Its desktop app looks like ChatGPT, Claude, or Gemini — familiar to anyone who has used a modern AI chat. Codex also has a generous free tier, which is enough to clean up most bookmark collections without paying for a subscription.
+> **First-time users often find OpenAI Codex the easiest starting point** — its desktop app is a familiar AI-chat interface, so there's little to learn. BookmarkOps works identically with Claude Code or Cursor; use whichever AI tool you already have.
 
 1. Install BookmarkOps from the Chrome Web Store.
 2. Open the dashboard, copy the MCP configuration block from the **Quick Setup** card.
@@ -82,9 +89,9 @@ scan → report → plan → dryRun → preview → backup → apply → verify 
 
 ### Who BookmarkOps is for
 
-- **People who already work with AI tools.** If you already use Codex, Claude Code, or Cursor — whether for writing code or just talking with an AI — BookmarkOps adds bookmark cleanup to the same conversation. No extra account, no separate tool to learn.
-- **People with thousands of unorganized bookmarks.** If your bookmark bar has been growing for years and you keep putting off the cleanup, the AI can do the tedious classification work in minutes.
-- **Privacy-conscious users.** If you don't want your browsing history or bookmark titles uploaded to a cloud service for "AI organization", BookmarkOps keeps everything local.
+- **People who already work with AI tools.** If you already use Codex, Claude Code, or Cursor, BookmarkOps adds bookmark cleanup to the same conversation. No extra account, no separate tool to learn.
+- **People with thousands of unorganized bookmarks.** If your bookmark bar has been growing for years, the AI can do the tedious classification work in minutes.
+- **Privacy-conscious users.** If you don't want your bookmark titles uploaded to a cloud service for "AI organization", BookmarkOps keeps everything local.
 
 ### Frequently asked questions
 
@@ -92,13 +99,13 @@ scan → report → plan → dryRun → preview → backup → apply → verify 
 You need an AI tool that supports MCP (Codex, Claude Code, Cursor, or anything else that speaks the protocol). The MCP bridge (`@bookmarkops/mcp`) is fetched automatically by `npx` the first time your AI tool starts it — no manual installation.
 
 **Can I use BookmarkOps without an MCP-capable AI tool?**
-Not in v0.1. The cleanup workflow currently requires an MCP-capable AI tool to draft and submit the plan. The shortest path is OpenAI Codex (see Quick start above). A file-based manual mode — drop in a plan JSON without any AI tool — is on the v0.2 roadmap.
+Not in this release. The cleanup workflow currently requires an MCP-capable AI tool to draft and submit the plan. The shortest path is OpenAI Codex (see Quick start above). A file-based manual mode — drop in a plan JSON without any AI tool — is on the roadmap for a future release.
 
 **What happens if a cleanup goes wrong?**
 Every apply takes a backup first. Type `RESTORE` in the dashboard and the previous bookmark state is restored, exactly as it was.
 
 **What if I rotate my MCP token?**
-Rotate in the dashboard, copy the new Quick Setup config, then restart your AI tool. The old token stops working once your AI tool restarts. See the [agent documentation](https://github.com/brianjhang/bookmarkops/blob/main/src/agent/README.md#security-model) for the full rotation flow and security model.
+Rotate in the dashboard, copy the new Quick Setup config, then restart your AI tool. The old token stops working once your AI tool restarts. See the agent documentation in the repository for the full rotation flow and security model.
 
 ### Open source
 
@@ -114,57 +121,79 @@ GitHub: https://github.com/brianjhang/bookmarkops
 
 Justification:
 - The core user value is "clean up the bookmark mess I have been avoiding" — a productivity job-to-be-done.
-- "Bookmark cleanup" and "bookmark manager" searches in CWS sit in Productivity, not Developer Tools.
-- The MCP integration is a *means*, not the *purpose*; placing it under Developer Tools would narrow discoverability to coding-AI users only, but the real audience is anyone with a bookmark mess plus access to a modern AI tool.
+- "Bookmark cleanup" / "bookmark manager" searches in CWS sit in Productivity, not Developer Tools.
+- The MCP integration is a *means*, not the *purpose*; Developer Tools would narrow discoverability to coding-AI users only, but the real audience is anyone with a bookmark mess plus a modern AI tool.
 
-Secondary option if Productivity is not allowed in your region: **Workflow & Planning**.
-
+Secondary option if Productivity is unavailable in your region: **Workflow & Planning**.
 Avoid: Developer Tools (too narrow), Tools (deprecated), Utilities (too generic).
 
 ---
 
-## Single-purpose description (CWS required field)
+## Single-purpose description (CWS Privacy practices field)
 
 ```
-BookmarkOps helps users clean up and reorganize their Chrome bookmarks through a safe, local workflow. AI tools connected via the Model Context Protocol may assist by proposing cleanup plans, but every change requires the user's explicit typed confirmation in the dashboard before any bookmark is modified.
+BookmarkOps helps users review and safely clean up their Chrome bookmarks. It scans the bookmarks, surfaces cleanup suggestions (duplicates, dead links, disorganized folders), and lets the user review and approve every change before it is applied, with automatic local backups. Optionally, a user who runs their own local AI command-line tool can connect it via a loopback (localhost) bridge to assist with the review. All processing happens locally on the user's device; the extension makes no remote network requests.
 ```
 
-> The single purpose is bookmark cleanup. MCP integration is a method to achieve that purpose, not a separate purpose.
+> Single purpose = bookmark cleanup. The MCP/AI integration is a method to achieve that purpose, not a separate purpose. This text must match the privacy policy.
 
 ---
 
-## Permission justifications
+## Permission justifications (CWS Privacy practices fields)
 
-The Chrome Web Store reviewer asks why each sensitive permission is needed. Here is the justification text for each — written conversationally for a human reviewer.
+### `bookmarks`
 
-### `bookmarks` (most heavily scrutinized)
-
-BookmarkOps is a bookmark cleanup extension. The `bookmarks` permission is the entire core feature: the extension reads the bookmark tree to scan, generate reports, and simulate cleanup plans; it writes to the tree only when applying a plan that the user has explicitly approved by typing the word `APPLY` in the dashboard. No bookmark data is ever sent to a remote server. All reads and writes go through Chrome's official `chrome.bookmarks` API.
+> Core functionality. The extension reads the user's bookmarks (including the metadata Chrome exposes per bookmark, such as date added / date last used, to classify usage) to analyze them for duplicates, dead links, and disorganization, and to apply cleanup changes that the user reviews and approves first by typing `APPLY` in the dashboard. Organizing bookmarks is the extension's central purpose and is impossible without this permission. All reads and writes use Chrome's official `chrome.bookmarks` API; no bookmark data is sent to any remote server.
 
 ### `storage`
 
-Used to persist:
-- The user's MCP session token (so AI tools can reconnect without re-pairing).
-- Dashboard preferences (theme, locale).
-- The most recent scan snapshot (so the dashboard can show stats without re-scanning).
-- Full pre-apply backups (so the user can restore the bookmark tree if a cleanup goes wrong).
-
-All data is stored in `chrome.storage.local` on the user's device. Nothing is synced or uploaded.
+> Stores the extension's own data locally on the user's device via `chrome.storage.local`: settings and UI preferences; the session token that authenticates the connection to the user's optional local AI bridge; cached scan results and health scores; review plans and approval requests the user's AI tool submitted that are pending the user's review; and the safety backups/snapshots that power the review-and-restore workflow. None of this is synced or transmitted off the device.
 
 ### `alarms`
 
-Schedules a single 1-minute polling cycle so BookmarkOps can pick up new MCP requests sent by the user's AI tool through the local bridge at `localhost:7842`. Without this alarm, MCP requests would not be processed in a timely manner. There is no other background work scheduled.
+> Schedules a periodic (about once per minute) local check that polls the user's optional local AI bridge for any review tasks the user's AI tool may have submitted. The request goes only to a loopback (localhost) address on the user's own machine. It runs from install whether or not the user has set up an AI tool; if no bridge is running it fails silently with nothing sent or received. No other background work is scheduled.
 
 ### Host permission `http://localhost:7842/*`
 
-BookmarkOps communicates with the user's MCP server through a local-only bridge that binds to `127.0.0.1:7842`. This host permission grants the extension the ability to make HTTP requests to that local bridge. The bridge is unreachable from other machines because it only listens on the loopback interface. No external host is accessed by BookmarkOps.
+> Connects only to a loopback address on the user's own machine. This is an optional local bridge the user themselves starts (via `npx @bookmarkops/mcp`) when they choose to connect a local AI command-line tool such as Claude Code, Cursor, or Codex to assist with bookmark review. Used to check bridge health and to exchange bookmark-review tasks and results locally. The bridge listens only on the loopback interface and is unreachable from other machines. The extension declares no other host permission and Chrome blocks any non-localhost request.
+
+### Remote code
+
+> No. The extension executes no remotely hosted code. All logic is bundled in the package (Manifest V3 compliant).
+
+---
+
+## Data usage disclosure & Limited Use certification (CWS Privacy practices fields)
+
+**What data the extension handles, and where it goes:**
+
+> BookmarkOps does not collect or transmit user data to the developer or any third party. It contains no analytics or telemetry. Bookmark data is read and processed locally. Two local-only data paths exist, both under the user's control and disclosed in the privacy policy: (1) when the user has connected their own local AI tool and that tool submits a request, bookmark data (e.g. scan results, reports, submitted review plans) is returned to a loopback bridge on the user's own machine — neither the extension nor the bridge forwards it to any cloud service; (2) when the user clicks a copy/launch button or an MCP setup helper, the relevant content (bookmark context, or the local bridge session token) is written to the user's system clipboard, governed by the OS, equivalent to a manual copy. Any onward transmission to a cloud AI is performed solely by the separate AI tool the user installed and configured under their own account/API key — outside BookmarkOps's control.
+
+**Certifications (all truthfully apply):**
+
+- I do not sell or transfer user data to third parties, outside of the approved use cases. ✔ (data goes only to the user's own local bridge at the user's AI tool's request, or to the user's own clipboard on the user's click)
+- I do not use or transfer user data for purposes unrelated to my item's single purpose. ✔
+- I do not use or transfer user data to determine creditworthiness or for lending purposes. ✔
+
+---
+
+## Privacy policy URL (CWS field)
+
+```
+https://github.com/brianjhang/bookmarkops/blob/main/PRIVACY-POLICY.md
+```
+
+> This exact URL goes in the CWS "Privacy policy" field. It must match the
+> URL inside `PRIVACY-POLICY.md`'s "Changes" section (branch `main`, exact
+> filename casing). The policy file must be live and render at this URL
+> (verify 200 in a browser) before submission. No GitHub Pages is involved.
 
 ---
 
 ## Cross-references
 
-- **Privacy policy:** [`docs/privacy-policy.md`](../privacy-policy.md) — the full statement, including data-flow details and the user's data-control options.
-- **Threat model:** [`src/agent/README.md` → Security model](https://github.com/brianjhang/bookmarkops/blob/main/src/agent/README.md#security-model).
+- **Privacy policy:** repo-root [`PRIVACY-POLICY.md`](https://github.com/brianjhang/bookmarkops/blob/main/PRIVACY-POLICY.md) — the full statement, including the local data-flow details and the clipboard channel.
+- **Threat model / security model:** agent documentation in the repository (`src/agent/README.md`, Security model section) — *verify this path/anchor resolves on the public repo after sync before relying on it in the listing.*
 - **README:** project overview, install steps, development guide.
 
-When filling in the CWS form, the **Privacy Policy URL** field should point to the GitHub Pages URL of `docs/privacy-policy.md` once Pages is enabled (see release checklist B.7).
+There is no GitHub Pages step. The CWS Privacy Policy URL field is the repo-root blob URL shown in the "Privacy policy URL" section above.

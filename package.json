@@ -1,6 +1,6 @@
 {
   "name": "bookmarkops",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "description": "AI-assisted bookmark cleanup MCP tool for Chrome. Scan, plan, and clean up bookmarks through any MCP-capable AI agent — with destructive actions gated by typed dashboard approval.",
@@ -13,7 +13,7 @@
     "url": "https://github.com/brianjhang/bookmarkops/issues"
   },
   "license": "MIT",
-  "author": "Brian Jhang <me@brianjhang.com>",
+  "author": "Brian Jhang <brianjhang.ai@gmail.com>",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

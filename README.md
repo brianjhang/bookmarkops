@@ -116,7 +116,7 @@ Full threat model: [`src/agent/README.md` → Security model](./src/agent/README
 
 ## Contact
 
-- Email: [me@brianjhang.com](mailto:me@brianjhang.com)
+- Email: [brianjhang.ai@gmail.com](mailto:brianjhang.ai@gmail.com)
 - Issues & feature requests: [github.com/brianjhang/bookmarkops/issues](https://github.com/brianjhang/bookmarkops/issues)
 - Personal site: [brianjhang.com](https://brianjhang.com/)
 

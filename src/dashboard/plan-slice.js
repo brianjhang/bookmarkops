@@ -127,7 +127,8 @@ export function createPlanSlice(ctx) {
 
     const before = renderReviewField(t('before'), renderNodeReview(item.before))
     const after = renderReviewField(t('after'), renderNodeReview(item.after, { after: true }))
-    const reason = renderReviewField(t('reason'), item.description || item.message || '--')
+    const description = typeof item.description === 'string' ? item.description.trim() : ''
+    const reason = renderReviewField(t('reason'), description || t('reasonMissing'))
     const checks = renderReviewField(t('checks'), renderChecks(item.checks || []))
     const related = renderReviewField(t('related'), renderRelatedBookmarks(item.relatedBookmarks || [], item.targetId))
 

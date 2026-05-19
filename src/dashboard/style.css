@@ -574,7 +574,10 @@ h2 {
   overflow-wrap: anywhere;
 }
 
-/* Settings row: 2-column grid for backup + agent panels */
+/* Settings row: 2-column grid for backup + agent panels.
+   The single divider above this row is provided by <hr class="section-divider" />
+   in main.js; .settings-row must NOT add its own border-top, or the divider
+   doubles up when the pending-approval section above is hidden. */
 .settings-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -582,7 +585,6 @@ h2 {
   margin-top: 18px;
   margin-bottom: 18px;
   padding-top: 18px;
-  border-top: 1px solid var(--border);
 }
 
 /* Health Score hero */
@@ -668,10 +670,15 @@ h2 {
   font-weight: 600;
 }
 
-/* Section divider: analysis ↔ action zones */
+/* Invisible vertical spacer between the analysis grid (insight-grid panels)
+   and the action zone (approval/backup). NOT a visible divider: the
+   .insight-grid panels already have their own bottom border (.panel
+   border 1px) which provides visual separation; drawing an extra 1px
+   border-top on hr created a 1px+1px doubled-line look whenever
+   approvalSection was hidden (and the approval section's panel border
+   when it was shown). Keep the margin as the spacing budget. */
 .section-divider {
   border: none;
-  border-top: 1px solid var(--border);
   margin: 24px 0;
 }
 

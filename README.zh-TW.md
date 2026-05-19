@@ -118,7 +118,7 @@ npm run validate                # 完整驗證套件(smoke tests + build)
 
 ## 聯絡
 
-- Email:[me@brianjhang.com](mailto:me@brianjhang.com)
+- Email:[brianjhang.ai@gmail.com](mailto:brianjhang.ai@gmail.com)
 - 問題回報 & 功能建議:[github.com/brianjhang/bookmarkops/issues](https://github.com/brianjhang/bookmarkops/issues)
 - 個人網站:[brianjhang.com](https://brianjhang.com/)
 

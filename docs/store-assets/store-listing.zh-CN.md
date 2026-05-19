@@ -2,9 +2,15 @@
 
 [English](./store-listing.md) · [繁體中文](./store-listing.zh-TW.md) · **简体中文**
 
-> 对应 Chrome Web Store 上架表单的文案来源。提交时把每一段贴到对应字段即可。
+> 对应 Chrome Web Store 上架表单的文案来源——listing 字段与 Privacy practices
+> 标签页字段都涵盖。提交时把每一段贴到对应字段即可。本文件已并入先前独立草拟
+> 的 Privacy-practices 修正内容(单一用途、权限说明、数据使用披露);该独立
+> 草稿已被本文件取代。
 >
-> **版本:** 1.0 · **最后更新:** 2026-05-15
+> **版本:** 2.0(已校正)· **最后更新:** 2026-05-19
+>
+> 必须与 repo 根目录 `PRIVACY-POLICY.md`(英文)完全一致。审核员会交叉比对
+> listing ↔ manifest ↔ 隐私政策,任何不一致是首次提审最常见的退回原因。
 
 ---
 
@@ -24,9 +30,7 @@ BookmarkOps — AI 书签整理工具
 用 AI 整理 Chrome 书签 —— 接上 Codex、Claude Code 或 Cursor,每个改动都要你在 Dashboard 亲自确认才会生效。
 ```
 
-> 字符数:约 75 · ✓ 在上限内。
->
-> 这是 CWS 搜索结果页第一眼看到的一句。先讲价值、点名 AI 工具、设定安全感的预期。
+> 约 75 字符 · ✓ 在上限内。CWS 搜索结果页第一眼看到的一句。
 
 ---
 
@@ -72,7 +76,7 @@ scan → report → plan → dryRun → preview → backup → apply → verify 
 
 ### 快速开始
 
-> **新手推荐 OpenAI Codex。** Codex 桌面端界面跟 ChatGPT、Claude、Gemini 一样,对用过现代 AI 对话工具的人来说零门槛。每天有免费额度,整理大多数人的书签完全够用,不必付订阅费。
+> **新手通常觉得 OpenAI Codex 最好上手** —— 它的桌面端就是一个熟悉的 AI 对话界面,几乎不用学。BookmarkOps 接 Claude Code 或 Cursor 完全一样;用你手边已经有的那个 AI 工具就行。
 
 1. 从 Chrome 应用商店安装 BookmarkOps。
 2. 打开 Dashboard,从 **Quick Setup** 卡片复制 MCP 配置。
@@ -92,13 +96,13 @@ scan → report → plan → dryRun → preview → backup → apply → verify 
 要有一个支持 MCP 的 AI 工具(Codex、Claude Code、Cursor 等)。MCP bridge 本身(`@bookmarkops/mcp`)会在 AI 工具第一次启动时通过 `npx` 自动下载,不用手动安装。
 
 **没有支持 MCP 的 AI 工具能用吗?**
-v0.1 不行。整理流程目前一定要靠支持 MCP 的 AI 工具起草方案并提交。最简单的路径是 OpenAI Codex(见上方快速开始)。文件导入式的手动模式 —— 直接放一份 plan JSON、不用接 AI 工具 —— 列入 v0.2 路线图。
+当前版本不行。整理流程目前一定要靠支持 MCP 的 AI 工具起草方案并提交。最简单的路径是 OpenAI Codex(见上方快速开始)。文件导入式的手动模式 —— 直接放一份 plan JSON、不用接 AI 工具 —— 列入未来版本的路线图。
 
 **万一整理出错怎么办?**
 每次应用前都会自动备份。在 Dashboard 输入 `RESTORE`,书签树就会回到之前的状态,一模一样。
 
 **轮替 token 之后要做什么?**
-在 Dashboard 轮替后,复制新的 Quick Setup 配置,然后**重启你的 AI 工具**。旧 token 在 AI 工具重启之后就失效。完整流程跟威胁模型在 [agent 文档的 Security model 段落](https://github.com/brianjhang/bookmarkops/blob/main/src/agent/README.md#security-model)。
+在 Dashboard 轮替后,复制新的 Quick Setup 配置,然后**重启你的 AI 工具**。旧 token 在 AI 工具重启之后就失效。完整流程跟威胁模型见 repository 内的 agent 文档(Security model 段落)。
 
 ### 开源
 
@@ -115,56 +119,77 @@ GitHub: https://github.com/brianjhang/bookmarkops
 理由:
 - 核心用户价值是「整理一直拖着没整的书签」 —— 属生产力 job-to-be-done。
 - CWS 上「bookmark cleanup」、「bookmark manager」搜索落在 Productivity 类别,不在 Developer Tools。
-- MCP 集成是**手段**,不是**目的**;归到 Developer Tools 反而把可触及的用户缩到只剩写代码的人,但实际 TAM 是「有书签乱、有现代 AI 工具可用」的所有人。
+- MCP 集成是**手段**,不是**目的**;归到 Developer Tools 反而把可触及的用户缩到只剩写代码的人。
 
 备案(若某些地区 Productivity 不开放):**Workflow & Planning**。
-
 避开:Developer Tools(太窄)、Tools(已淘汰)、Utilities(太空)。
 
 ---
 
-## 单一用途说明 / Single-purpose description(CWS 必填)
+## 单一用途说明 / Single-purpose description(CWS Privacy practices 字段)
 
 ```
-BookmarkOps 协助用户通过安全的本机工作流程整理 Chrome 书签。通过 Model Context Protocol 连线的 AI 工具可协助提出整理方案,但任何书签改动前都必须用户在 Dashboard 亲自输入确认短语才会执行。
+BookmarkOps 协助用户检视并安全地整理 Chrome 书签。它扫描书签、提出整理建议(重复、失效链接、杂乱文件夹),每个改动应用前都让用户检视并核准,并自动做本机备份。用户也可以选择把自己本机运行的 AI 命令行工具通过 loopback(localhost)bridge 接上来协助检视。所有处理都在用户设备本机进行;扩展程序不发出任何远程网络请求。
 ```
 
-> 「单一用途」是书签整理。MCP 集成是达成此目的的手段,不是另一个独立用途。
+> 「单一用途」是书签整理。MCP / AI 集成是达成此目的的手段,不是另一个独立用途。此段必须与隐私政策一致。
 
 ---
 
-## 各权限说明 / Permission justifications
+## 各权限说明 / Permission justifications(CWS Privacy practices 字段)
 
-Chrome Web Store 审核员会问每个敏感权限为什么需要。以下是给审核员看的口语化说明。
+### `bookmarks`
 
-### `bookmarks`(审核最仔细的权限)
-
-BookmarkOps 是书签整理扩展程序,`bookmarks` 权限就是整个核心功能:扩展程序读取书签树做扫描、生成报告、模拟整理方案;**只有**在用户于 Dashboard 上亲自输入 `APPLY` 短语、明确核准方案之后,才会写入书签树。没有任何书签数据会被送到远程服务器。所有读写都通过 Chrome 官方 `chrome.bookmarks` API。
+> 核心功能。扩展程序读取书签(含 Chrome 对每个书签提供的 metadata,如加入日期、最后使用日期,用以分类使用频率)以分析重复、失效链接与杂乱,并在用户于 Dashboard 亲自输入 `APPLY`、检视核准后才应用整理改动。书签整理是本扩展程序的核心目的,没有此权限无法达成。所有读写都通过 Chrome 官方 `chrome.bookmarks` API;不会有任何书签数据送到远程服务器。
 
 ### `storage`
 
-用于持久化下列项目:
-- 用户的 MCP session token(让 AI 工具不用每次重新配对)。
-- Dashboard 偏好配置(主题、语言)。
-- 最近一次扫描快照(让 Dashboard 不用每次重扫就能显示统计)。
-- 应用前的完整书签备份(让用户整理出错时可还原)。
-
-全部数据存在用户设备上的 `chrome.storage.local`,不同步、不上传。
+> 通过 `chrome.storage.local` 把扩展程序自己的数据存在用户设备本机:设置与 UI 偏好;用来验证与用户本机 AI bridge 连接的 session token;扫描结果与健康度分数的缓存;由用户 AI 工具提交、等待用户检视的整理方案与核准请求;以及 review-and-restore 工作流程用的安全备份/快照。这些都不同步、不传出设备。
 
 ### `alarms`
 
-只调度一个每分钟执行一次的 polling 任务,让 BookmarkOps 能通过 `localhost:7842` 的本机 bridge 取得 AI 工具发来的新 MCP 请求。没有这个 alarm,MCP 请求无法及时处理。没有其他后台任务。
+> 调度一个定期(约每分钟一次)的本机检查,向用户本机的可选 AI bridge 轮询用户 AI 工具可能提交的待审工作。该请求只送到用户本机的 loopback(localhost)地址。它从安装起就执行,不论用户是否设置过 AI 工具;若没有 bridge 在跑,请求静默失败,不送出也不接收任何东西。没有其他后台任务。
 
 ### Host permission `http://localhost:7842/*`
 
-BookmarkOps 通过绑在 `127.0.0.1:7842` 的本机 bridge 跟用户的 MCP server 通信。这个 host permission 允许扩展程序对该本机 bridge 发 HTTP 请求。Bridge 只监听 loopback 接口,别台机器连不到。BookmarkOps **不访问任何外部主机**。
+> 只连到用户本机的 loopback 地址。这是用户自己启动的可选本机 bridge(通过 `npx @bookmarkops/mcp`),在用户选择接上本机 AI 命令行工具(如 Claude Code、Cursor、Codex)协助书签检视时用。用于检查 bridge 健康状态、在本机交换书签检视的工作与结果。Bridge 只监听 loopback 接口,别台机器连不到。扩展程序未声明任何其他 host permission,Chrome 会挡掉任何非 localhost 请求。
+
+### 远程代码 / Remote code
+
+> 无。扩展程序不执行任何远程托管的代码。所有逻辑都打包在包内(符合 Manifest V3)。
 
 ---
 
-## 交叉引用
+## 数据使用披露与 Limited Use 声明 / Data usage disclosure & Limited Use(CWS Privacy practices 字段)
 
-- **隐私政策:** [`docs/privacy-policy.zh-CN.md`](../privacy-policy.zh-CN.md) —— 含完整数据流向说明、用户可掌控的事项。
-- **威胁模型:** [`src/agent/README.md` → Security model](https://github.com/brianjhang/bookmarkops/blob/main/src/agent/README.md#security-model)。
+**扩展程序处理哪些数据、数据去哪:**
+
+> BookmarkOps 不向开发者或任何第三方收集或传输用户数据。没有任何分析或 telemetry。书签数据在本机读取与处理。存在两条本机限定的数据路径,皆由用户控制且已在隐私政策披露:(1) 当用户已接上自己本机的 AI 工具、该工具提交请求时,书签数据(如扫描结果、报告、提交的整理方案)会回传到用户本机的 loopback bridge —— 扩展程序与 bridge 都不会把它转发到任何云端服务;(2) 当用户点击复制/启动按钮或 MCP 设置助手时,相关内容(书签 context,或本机 bridge session token)会写入用户的系统剪贴板,由操作系统管理,等同于手动复制。任何后续送往云端 AI 的传输,完全由用户自己安装并以自己账号/API key 配置的那个独立 AI 工具执行 —— 不在 BookmarkOps 控制范围内。
+
+**声明(以下皆属实):**
+
+- 除已核准用途外,不销售或转移用户数据给第三方。✔(数据只在用户 AI 工具请求时送到用户自己的本机 bridge,或在用户点击时送到用户自己的剪贴板)
+- 不将用户数据用于与本项目单一用途无关的目的。✔
+- 不将用户数据用于判断信用度或贷款用途。✔
+
+---
+
+## 隐私政策 URL / Privacy policy URL(CWS 字段)
+
+```
+https://github.com/brianjhang/bookmarkops/blob/main/PRIVACY-POLICY.md
+```
+
+> 这条确切 URL 填进 CWS「隐私政策」字段。它必须与 `PRIVACY-POLICY.md` 内「Changes」段落的 URL 完全一致(分支 `main`、文件名大小写完全相同)。提审前该文件必须在此 URL 已 live 且能正常 render(在浏览器确认 200)。不涉及任何 GitHub Pages。
+>
+> 注:v1 隐私政策仅提供英文版(根目录 `PRIVACY-POLICY.md`)。中文化政策为未来版本候选,非 CWS 必要。
+
+---
+
+## 交叉引用 / Cross-references
+
+- **隐私政策:** repo 根目录 [`PRIVACY-POLICY.md`](https://github.com/brianjhang/bookmarkops/blob/main/PRIVACY-POLICY.md)(英文)—— 完整声明,含本机数据流向与剪贴板管道细节。
+- **威胁模型 / 安全模型:** repository 内的 agent 文档(`src/agent/README.md`,Security model 段落)—— *引用前须先确认此路径/anchor 在 sync 后的 public repo 真的存在。*
 - **README:** 项目总览、安装步骤、开发指南。
 
-填 CWS 表单时,**Privacy Policy URL** 字段应指向 `docs/privacy-policy.md` 的 GitHub Pages URL(等 B.7 启用 Pages 后即可生效)。
+没有 GitHub Pages 这一步。CWS 隐私政策 URL 字段填上方「隐私政策 URL」段的 repo 根目录 blob URL。

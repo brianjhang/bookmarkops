@@ -1,10 +1,10 @@
 {
   "manifest_version": 3,
   "name": "__MSG_extensionName__",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "__MSG_extensionDescription__",
   "default_locale": "en",
-  "author": "Brian Jhang <me@brianjhang.com>",
+  "author": "Brian Jhang <brianjhang.ai@gmail.com>",
   "homepage_url": "https://github.com/brianjhang/bookmarkops",
   "icons": {
     "16": "icons/icon-16.png",

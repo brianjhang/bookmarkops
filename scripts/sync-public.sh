@@ -186,12 +186,12 @@ fi
 echo "─── Creating squash commit ──────────────────────────────────"
 # Pin public release author identity here — do NOT rely on the host's git
 # global config. The public-facing identity is the unified project address
-# (me@brianjhang.com), distinct from any per-agent / internal committer.
+# (brianjhang.ai@gmail.com), distinct from any per-agent / internal committer.
 git -C "$PUBLIC_DIR" \
   -c user.name="Brian Jhang" \
-  -c user.email="me@brianjhang.com" \
+  -c user.email="brianjhang.ai@gmail.com" \
   commit \
-    --author="Brian Jhang <me@brianjhang.com>" \
+    --author="Brian Jhang <brianjhang.ai@gmail.com>" \
     -m "Release v${VERSION}"
 
 echo ""
