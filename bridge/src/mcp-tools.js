@@ -1,8 +1,10 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { z } from 'zod'
 
+const { default: pkg } = await import('../package.json', { with: { type: 'json' } })
+
 export function createMcpServer(bridge, agentToken) {
-  const server = new McpServer({ name: 'bookmarkops', version: '0.1.0' })
+  const server = new McpServer({ name: 'bookmarkops', version: pkg.version })
 
   function call(tool, params = {}) {
     return bridge.enqueue(tool, params, agentToken)

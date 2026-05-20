@@ -47,7 +47,7 @@ Chrome Web Store 上架後,直接從商店安裝即可,不用這套步驟。
 
 打開 BookmarkOps Dashboard → **AI Agent Settings** → **Quick Setup**,複製 JSON 設定貼到你的 AI 工具裡。
 
-**首次使用者推薦 OpenAI Codex** —— Codex 桌面端介面跟 ChatGPT、Claude、Gemini 一樣熟悉,有每天免費額度,整理大多數人的書籤完全夠用。
+**新手通常覺得 OpenAI Codex 最好上手** —— 它的桌面端就是一個熟悉的 AI 對話介面,幾乎不用學。BookmarkOps 接 Claude Code 或 Cursor 完全一樣;用你手邊已經有的那個 AI 工具就行。
 
 設定範例完整版見根 README:[Quick Start 段](../../README.zh-TW.md#快速開始)。
 

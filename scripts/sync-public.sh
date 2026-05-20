@@ -72,6 +72,7 @@ EXCLUDE_ARGS=(
   --exclude="dist/"
   --exclude=".vite/"
   --exclude=".omc/"
+  --exclude=".gate/"
   --exclude=".claude/"
   --exclude=".codex/"
   --exclude=".agents/"
@@ -104,8 +105,8 @@ done
 cp "$PKG_TEMPLATE"    "$SNAPSHOT/package.json"
 cp "$IGNORE_TEMPLATE" "$SNAPSHOT/.gitignore"
 
-# Public-facing README templates strip internal references (v2-roadmap,
-# ai-doorway, internal docs paths). They override the internal-canonical
+# Public-facing README templates strip internal-only references (internal
+# names and internal docs paths). They override the internal-canonical
 # READMEs that may legitimately reference internal-only material.
 for t in "${README_TEMPLATES[@]}"; do
   target_name="${t%.public}"          # README.md.public → README.md
@@ -117,23 +118,28 @@ done
 # Each pattern must be a precise string that uniquely identifies internal-only
 # content. Patterns are matched literally with `grep -F`. Avoid generic words
 # like "v2" / "openspec" that have legitimate public uses.
-LEAK_PATTERNS=(
-  'v2-roadmap'                       # internal-only docs subdir
-  'ai-doorway'                       # internal parallel track code name
-  '/Users/brian/'                    # personal absolute path leak
-  'docs/audits/'                     # internal audit dir
-  'docs/release/'                    # internal release dir
-  'docs/launch/'                     # internal launch dir
-  'docs/archive/'                    # internal archive dir
-  'docs/project-structure.md'        # internal project-structure doc
-  'forgejo'                          # internal hosting infra
-  'vibe-switch'                      # adjacent internal project
-  'ai-commerce-os'                   # adjacent internal project
-  'ServerAdmin'                      # parent dir name on dev machine
-  'workbench launcher'               # v2 concept phrase (English)
-  '工作台啟動器'                       # v2 concept phrase (繁中)
-  '工作台启动器'                       # v2 concept phrase (简中)
-)
+# Patterns are loaded from an internal-only file that is NOT on the public
+# whitelist, so the public sync-public.sh never carries the codename list
+# in its own source. Blank lines and lines starting with '#' are ignored;
+# every other non-empty line is treated as a literal `grep -F` pattern.
+LEAK_PATTERNS_FILE="${INTERNAL_DIR}/.gate/leak-patterns.txt"
+[ -r "$LEAK_PATTERNS_FILE" ] || {
+  echo "ERROR: leak-gate patterns file missing or unreadable: $LEAK_PATTERNS_FILE"
+  echo "Refusing to sync — the leak gate cannot run without its patterns. Restore the file before retrying."
+  exit 1
+}
+LEAK_PATTERNS=()
+while IFS= read -r pattern_line || [ -n "$pattern_line" ]; do
+  case "$pattern_line" in
+    ''|\#*) continue ;;
+  esac
+  LEAK_PATTERNS+=("$pattern_line")
+done < "$LEAK_PATTERNS_FILE"
+[ ${#LEAK_PATTERNS[@]} -gt 0 ] || {
+  echo "ERROR: leak-gate patterns file is empty (or only comments/blanks): $LEAK_PATTERNS_FILE"
+  echo "Refusing to sync — the leak gate cannot run with zero patterns."
+  exit 1
+}
 # Excluded from scan: the gate's own source code (it must contain the patterns
 # it's checking for, by definition).
 echo "─── Content leak gate(scanning snapshot)─────────────────────"
