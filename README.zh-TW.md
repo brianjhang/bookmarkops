@@ -4,7 +4,17 @@
 
 **讓 AI 安全整理 Chrome 書籤的 MCP 工具。** 透過任何支援 MCP 的 AI 工具（Codex、Claude Code、Cursor）掃描、規劃、清理你的 Chrome 書籤;所有會改動書籤的動作,必須由你在 Dashboard 上明確核准才會執行。
 
-> **版本:** v0.1 · **MCP server:** npm 已發佈 [`@bookmarkops/mcp`](https://www.npmjs.com/package/@bookmarkops/mcp) v0.1.3 · **Chrome Web Store:** 上架審核中。
+> **版本:** v1.0.0 · **MCP server:** npm 已發佈 [`@bookmarkops/mcp`](https://www.npmjs.com/package/@bookmarkops/mcp) v0.1.3 · **Chrome Web Store:** 已上架。
+
+---
+
+## 安裝
+
+**推薦 —— Chrome 線上應用程式商店:** [安裝 BookmarkOps](https://chromewebstore.google.com/detail/bookmarkops/neeaphhmhallehmlmeihkeolikdmmnaf)
+
+Google 審過、簽過了。一鍵安裝、自動更新。
+
+**想自己 build 的開發者:** 看下方 [快速開始](#快速開始) 就好。
 
 ---
 
@@ -35,7 +45,7 @@ scan → report → plan → dryRun → preview → backup → apply → verify 
 
 ### 1. 安裝 Chrome 擴充套件
 
-Chrome Web Store 上架前,先以「未封裝擴充套件」載入:
+想自己 build 的開發者,以「未封裝擴充套件」載入:
 
 ```bash
 npm install

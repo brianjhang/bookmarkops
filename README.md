@@ -4,7 +4,17 @@
 
 **AI-assisted bookmark cleanup MCP tool for Chrome.** Scan, plan, and clean up your Chrome bookmarks through any MCP-capable AI agent — Codex, Claude Code, Cursor — with destructive actions gated by your explicit dashboard approval.
 
-> **Version:** v0.1 · **MCP server:** [`@bookmarkops/mcp`](https://www.npmjs.com/package/@bookmarkops/mcp) v0.1.3 on npm · **Chrome Web Store:** submission in progress.
+> **Version:** v1.0.0 · **MCP server:** [`@bookmarkops/mcp`](https://www.npmjs.com/package/@bookmarkops/mcp) v0.1.3 on npm · **Chrome Web Store:** live.
+
+---
+
+## Install
+
+**Recommended — Chrome Web Store:** [Install BookmarkOps](https://chromewebstore.google.com/detail/bookmarkops/neeaphhmhallehmlmeihkeolikdmmnaf)
+
+Reviewed and signed by Google. One click, auto-updates.
+
+**For developers — build from source:** see [Quick start](#quick-start) below.
 
 ---
 
@@ -35,7 +45,7 @@ The workflow splits between three pieces:
 
 ### 1. Install the Chrome extension
 
-Until the Chrome Web Store listing is live, load it as an unpacked extension:
+For developers building from source, load as an unpacked extension:
 
 ```bash
 npm install

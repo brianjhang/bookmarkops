@@ -4,7 +4,17 @@
 
 **让 AI 安全整理 Chrome 书签的 MCP 工具。** 通过任何支持 MCP 的 AI 工具(Codex、Claude Code、Cursor)扫描、规划、清理你的 Chrome 书签;所有会改动书签的动作,必须由你在 Dashboard 上明确核准才会执行。
 
-> **版本:** v0.1 · **MCP server:** npm 已发布 [`@bookmarkops/mcp`](https://www.npmjs.com/package/@bookmarkops/mcp) v0.1.3 · **Chrome 应用商店:** 上架审核中。
+> **版本:** v1.0.0 · **MCP server:** npm 已发布 [`@bookmarkops/mcp`](https://www.npmjs.com/package/@bookmarkops/mcp) v0.1.3 · **Chrome 网上应用店:** 已上架。
+
+---
+
+## 安装
+
+**推荐 —— Chrome 网上应用店:** [安装 BookmarkOps](https://chromewebstore.google.com/detail/bookmarkops/neeaphhmhallehmlmeihkeolikdmmnaf)
+
+Google 审过、签过了。一键安装、自动更新。
+
+**想自己 build 的开发者:** 看下方 [快速开始](#快速开始) 就好。
 
 ---
 
@@ -35,7 +45,7 @@ scan → report → plan → dryRun → preview → backup → apply → verify 
 
 ### 1. 安装 Chrome 扩展
 
-Chrome 应用商店上架前,先以「加载已解压的扩展程序」方式安装:
+想自己 build 的开发者,以「加载已解压的扩展程序」方式安装:
 
 ```bash
 npm install
